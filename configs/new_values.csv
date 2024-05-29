@@ -6,7 +6,7 @@ PDCdb_gsc_ssc_psc_cpu_avg,33.6,34.1,35.7
 PDCdb_upp_cpu_peak,13.7,13.4,13.8
 PDCdb_upp_cpu_avg,11.5,11.4,11.7
 PDCdb_PGW_requests_s,3066,3062,3063
-/PDCdb_PGW_contexts,1094000,1095000,1095000
+PDCdb_PGW_contexts,1094000,1095000,1095000
 PDCdb_PDP_contexts,275500,274700,274700
 PDCdb_SGW_S4S11_requests_s,3250,3246,3248
 PDCdb_SGW_contexts,846300,846600,846800
