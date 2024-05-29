@@ -16,7 +16,7 @@ if __name__ == '__main__':
             print(c)
             print(".*" + checkpoint['checkpoint'] + ".*\n?.*verdict\.config\.field\.range\((\d+)\, (\d+)\).*")
             file_contents = file.read()
-            match = re.search(".*" + checkpoint['checkpoint'] + ".*\n?.*verdict\.config\.field\.range\((\d+)\, (\d+)\).*",
+            match = re.findall(".*" + checkpoint['checkpoint'] + ".*\n?.*verdict\.config\.field\.range\((\d+)\, (\d+)\).*",
                               file_contents, re.MULTILINE)
             new_values = new_value_calc(
                 [checkpoint['new_value1'], checkpoint['new_value2'], checkpoint['new_value3']], match.group(1),
