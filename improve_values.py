@@ -11,7 +11,9 @@ if __name__ == '__main__':
         checkpoints = [row for row in csv_reader]
 
     for checkpoint in checkpoints:
+        c=0
         with open(TARGET_FOLDER+FILE_TO_IMPROVE, "r+") as file:
+            print(c)
             file_contents = file.read()
             match = re.search(".*" + checkpoint['checkpoint'] + ".*verdict\.config\.field\.range\((\d+)\, (\d+)\).*",
                               file_contents)
@@ -25,3 +27,4 @@ if __name__ == '__main__':
             file.seek(0)
             file.truncate()
             file.write(file_contents)
+            c+=1
