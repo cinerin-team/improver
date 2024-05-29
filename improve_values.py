@@ -19,11 +19,11 @@ if __name__ == '__main__':
             match = re.findall(".*" + checkpoint['checkpoint'] + ".*\n?.*verdict\.config\.field\.range\((\d+)\, (\d+)\).*",
                               file_contents, re.MULTILINE)
             new_values = new_value_calc(
-                [checkpoint['new_value1'], checkpoint['new_value2'], checkpoint['new_value3']], match.group(1),
-                match.group(2))
-            old_line = match.group(0)
-            new_line = re.sub(match.group(1), new_values[0], old_line)
-            new_line = re.sub(match.group(2), new_values[1], new_line)
+                [checkpoint['new_value1'], checkpoint['new_value2'], checkpoint['new_value3']], match[0].group(1),
+                match[0].group(2))
+            old_line = match[0].group(0)
+            new_line = re.sub(match[0].group(1), new_values[0], old_line)
+            new_line = re.sub(match[0].group(2), new_values[1], new_line)
             file_contents = file_contents.replace(old_line, new_line)
             file.seek(0)
             file.truncate()
