@@ -1,9 +1,7 @@
-# create a folder in the sandbox, and use that
 import re
 import subprocess
 
-TARGET_FOLDER = "/lab/epg_st_sandbox/erkmiap/PCEPGST-2857/"
-EPGCATS_VERSION = "EPG_28R252XS1"
+from configs.variables import EPGCATS_VERSION, TARGET_FOLDER
 
 if __name__ == '__main__':
     subprocess.call(
