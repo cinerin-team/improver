@@ -2,7 +2,7 @@ import csv
 import re
 
 from new_value_calc import new_value_calc
-from configs.variables import FILE_TO_IMPROVE
+from configs.variables import FILE_TO_IMPROVE, TARGET_FOLDER
 
 if __name__ == '__main__':
     checkpoints = []
@@ -11,7 +11,7 @@ if __name__ == '__main__':
         checkpoints = [row for row in csv_reader]
 
     for checkpoint in checkpoints:
-        with open(FILE_TO_IMPROVE, "r+") as file:
+        with open(TARGET_FOLDER+FILE_TO_IMPROVE, "r+") as file:
             file_contents = file.read()
             match = re.search(".*" + checkpoint['checkpoint'] + ".*verdict\.config\.field\.range\((\d+)\, (\d+)\).*",
                               file_contents)
