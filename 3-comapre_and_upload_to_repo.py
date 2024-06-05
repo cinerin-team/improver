@@ -1,12 +1,16 @@
 import csv
 import difflib
 import os.path
+import shutil
+import subprocess
 
 from cryptography.fernet import Fernet
 import base64
 
+from configs.variables import REPO_FOLDER, FILE_TO_IMPROVE, TARGET_FOLDER, EPGCATS_VERSION
 
-# Kulcs betöltése
+
+# Load keys
 def load_key():
     if not os.path.exists("configs/secret.key"):
         key = Fernet.generate_key()
@@ -15,74 +19,66 @@ def load_key():
     return open("configs/secret.key", "rb").read()
 
 
-# String titkosítása
+# Encrypt strings to hide special characters
 def encrypt_string(input_string, key):
     fernet = Fernet(key)
     encrypted = fernet.encrypt(input_string.encode())
-
-    # Base64 URL-safe kódolás az eredmény string-gé alakításához
     base64_encoded = base64.urlsafe_b64encode(encrypted).decode()
-
     return base64_encoded
 
 
-# String visszafejtése
+# Decrypt Strings
 def decrypt_string(encrypted_string, key):
     fernet = Fernet(key)
-
-    # Base64 URL-safe dekódolás
     base64_decoded = base64.urlsafe_b64decode(encrypted_string.encode())
     decrypted = fernet.decrypt(base64_decoded).decode()
-
     return decrypted
 
 
-# Fájlok beolvasása
+# Reading files
 def read_file(file_path):
     with open(file_path, 'r') as file:
         return file.readlines()
 
 
-# Blokkok összehasonlítása és titkosítása
-def compare_and_encrypt(file1_lines, file2_lines, key):
-    diff = difflib.ndiff(file1_lines, file2_lines)
+# Comparing files
+def compare_files(original_lines, modified_lines):
+    diff = difflib.ndiff(original_lines, modified_lines)
     blocks = []
-    block1, block2 = [], []
+    block = []
     for line in diff:
-        if line.startswith('  '):  # Közös sor
-            if block1 or block2:
-                blocks.append((block1, block2))
-                block1, block2 = [], []
-        elif line.startswith('- '):  # Csak az első fájlban van
-            block1.append(line[2:])
-        elif line.startswith('+ '):  # Csak a második fájlban van
-            block2.append(line[2:])
+        if line.startswith('  '):  # common row
+            if block:
+                blocks.append(block)
+                block = []
+        else:
+            block.append(line)
+    if block:
+        blocks.append(block)
+    return blocks
 
-    # Az utolsó blokk hozzáadása
-    if block1 or block2:
-        blocks.append((block1, block2))
 
+# Save blocks ro CSV
+def save_blocks_to_csv(blocks, output_csv_loc, key):
     encrypted_blocks = []
-    for block1, block2 in blocks:
-        encrypted_block1 = encrypt_string(''.join(block1), key)
-        encrypted_block2 = encrypt_string(''.join(block2), key)
-        encrypted_blocks.append((encrypted_block1, encrypted_block2))
+    for block in blocks:
+        block1 = ''.join([line[2:] for line in block if line.startswith('- ')])
+        block2 = ''.join([line[2:] for line in block if line.startswith('+ ')])
+        if block1 and block2:
+            encrypted_block1 = encrypt_string(block1, key)
+            encrypted_block2 = encrypt_string(block2, key)
+            encrypted_blocks.append((encrypted_block1, encrypted_block2))
 
-    return encrypted_blocks
-
-
-# Blokkok mentése CSV-be
-def save_blocks_to_csv(blocks, output_csv):
-    with open(output_csv, 'w', newline='') as csvfile:
+    with open(output_csv_loc, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
-        for block1, block2 in blocks:
+        for block1, block2 in encrypted_blocks:
             writer.writerow([block1, block2])
 
 
-# CSV-ből blokkok visszafejtése
+# Decompile blocks from CSV
 def load_blocks_from_csv(input_csv, key):
     blocks = []
-    with open(input_csv, newline='') as csvfile:
+    with open(input_csv, 'r', newline='') as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
             block1 = decrypt_string(row[0], key)
@@ -91,44 +87,53 @@ def load_blocks_from_csv(input_csv, key):
     return blocks
 
 
-# Fájl frissítése blokkok alapján
-def update_file(file_lines, blocks):
-    updated_lines = file_lines[:]
-    diff = difflib.ndiff(updated_lines, updated_lines)  # Ez csak egy placeholder
-
-    block_idx = 0
-    for line in diff:
-        if block_idx >= len(blocks):
-            break
-        if line.startswith('- '):  # Csak az első fájlban van
-            block1, block2 = blocks[block_idx]
-            updated_lines = updated_lines.replace(block1, block2)
-            block_idx += 1
-
+# Apply blocks to file
+def apply_blocks_to_file(original_lines, file2_lines, blocks):
+    updated_lines = file2_lines[:]
+    for block1, block2 in blocks:
+        block1_lines = block1.splitlines(keepends=True)
+        block2_lines = block2.splitlines(keepends=True)
+        for i in range(len(original_lines)):
+            if original_lines[i:i+len(block1_lines)] == block1_lines:
+                for j in range(len(updated_lines)):
+                    if updated_lines[j:j+len(block1_lines)] == block1_lines:
+                        updated_lines[j:j+len(block1_lines)] = block2_lines
+                        break
+                break
     return updated_lines
 
 
-# Fő funkció
-def main(file1_path, file2_path, output_csv):
+def download_the_original_file():
+    if os.path.exists("configs/original"):
+        os.remove("configs/original")
+    shutil.copy("/lab/epg_scm4_builds/program/ci/" + EPGCATS_VERSION + FILE_TO_IMPROVE, "configs/original")
+
+
+def main(original_path_loc, improved_file_loc, repo_file_loc, output_csv_loc):
     key = load_key()
-    file1_lines = read_file(file1_path)
-    file2_lines = read_file(file2_path)
+    original_lines = read_file(original_path_loc)
+    file1_lines = read_file(improved_file_loc)
+    file2_lines = read_file(repo_file_loc)
 
-    encrypted_blocks = compare_and_encrypt(file1_lines, file2_lines, key)
-    save_blocks_to_csv(encrypted_blocks, output_csv)
+    # Differences in the original and the improved file
+    blocks = compare_files(original_lines, file1_lines)
+    save_blocks_to_csv(blocks, output_csv_loc, key)
 
-    # Az egyik fájl frissítése a CSV alapján
-    blocks = load_blocks_from_csv(output_csv, key)
-    updated_lines = update_file(file1_lines, blocks)
+    # Decompiling blocks from CSV
+    decrypted_blocks = load_blocks_from_csv(output_csv_loc, key)
 
-    with open(file1_path, 'w') as file:
+    # Original and improved files comparison
+    updated_lines = apply_blocks_to_file(original_lines, file2_lines, decrypted_blocks)
+
+    with open(repo_file_loc, 'w') as file:
         file.writelines(updated_lines)
 
 
 if __name__ == '__main__':
-
-    # Futtatás példa
-    file1_path = 'improved.txt'
-    file2_path = 'repo.txt'
+    download_the_original_file()
+    original_file = "configs/original"
+    improved_file = REPO_FOLDER + FILE_TO_IMPROVE  # This is on repo which should be updated
+    repo_file = TARGET_FOLDER + FILE_TO_IMPROVE  # This is the improved file
     output_csv = 'configs/diff.csv'
-    main(file1_path, file2_path, output_csv)
+
+    main(original_file, improved_file, repo_file, output_csv)
