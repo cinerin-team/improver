@@ -32,7 +32,9 @@ To upload the changes to the repo and commit changes of the `configs/variables.p
 FILE_TO_IMPROVE = "epgcats/tools/verdict/user_checkpoints/stability_checkpoints/tc37540_1_6_16.py" # starting from epgcats folder 
 REPO_FOLDER = '/workspace/git/erkmiap/epg/' 
 EPGCATS_VERSION = "EPG_28R252VY1"
+ADDITIONAL_FILES_TO_COPY = ["epgcats/tcdb/TC_TID_general/TC_TID_stability.db"]  # like TC_TID_
 
 The first value is the file which contains the checkpoints which are supposed to be improved. 
 The second value is the folder where the repo is. WARNING!! the git repo should be clean and updated!!! 
 The third value is for comparison to the downloaded epgcats file.
+The fourth value is for additional files like starting with TC_TID_ or others and give the files in array elements.

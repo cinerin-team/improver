@@ -4,7 +4,7 @@ import os.path
 import shutil
 import base64
 
-from configs.variables import REPO_FOLDER, FILE_TO_IMPROVE, TARGET_FOLDER, EPGCATS_VERSION
+from configs.variables import REPO_FOLDER, FILE_TO_IMPROVE, TARGET_FOLDER, EPGCATS_VERSION, ADDITIONAL_FILES_TO_COPY
 
 
 # Encrypt strings to hide special characters
@@ -87,10 +87,10 @@ def apply_blocks_to_file(original_lines, file2_lines, blocks):
     return updated_lines
 
 
-def download_the_original_file():
+def download_the_original_file(file_loc):
     if os.path.exists("configs/original"):
         os.remove("configs/original")
-    shutil.copy("/lab/epg_scm4_builds/program/ci/" + EPGCATS_VERSION + "/" + FILE_TO_IMPROVE, "configs/original")
+    shutil.copy("/lab/epg_scm4_builds/program/ci/" + EPGCATS_VERSION + "/" + file_loc, "configs/original")
 
 
 def main(original_path_loc, improved_file_loc, repo_file_loc, output_csv_loc):
@@ -113,10 +113,19 @@ def main(original_path_loc, improved_file_loc, repo_file_loc, output_csv_loc):
 
 
 if __name__ == '__main__':
-    download_the_original_file()
+    download_the_original_file(FILE_TO_IMPROVE)
     original_file = "configs/original"
     repo_file = REPO_FOLDER + FILE_TO_IMPROVE  # This is on repo which should be updated
     improved_file = TARGET_FOLDER + FILE_TO_IMPROVE  # This is the improved file
     output_csv = 'configs/diff.csv'
 
     main(original_file, improved_file, repo_file, output_csv)
+
+    if len(ADDITIONAL_FILES_TO_COPY) > 0:
+        for file in ADDITIONAL_FILES_TO_COPY:
+            download_the_original_file(file)
+            original_file = "configs/original"
+            repo_file = REPO_FOLDER + file  # This is on repo which should be updated
+            improved_file = TARGET_FOLDER + file  # This is the improved file
+            output_csv = 'configs/diff.csv'
+            main(original_file, improved_file, repo_file, output_csv)
