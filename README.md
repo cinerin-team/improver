@@ -30,7 +30,7 @@ Attention!! This does only the checkpoint tuning, if other values are needed to 
 The `3-comapre_and_upload_to_repo.py` calculates the changes from the original downloaded epgcats and uploads the changes to the repo.
 To upload the changes to the repo and commit changes of the `configs/variables.py` values. For example: 
 FILE_TO_IMPROVE = "epgcats/tools/verdict/user_checkpoints/stability_checkpoints/tc37540_1_6_16.py" # starting from epgcats folder 
-REPO_FOLDER = '/workspace/git/erkmiap/epg' 
+REPO_FOLDER = '/workspace/git/erkmiap/epg/' 
 EPGCATS_VERSION = "EPG_28R252VY1"
 
 The first value is the file which contains the checkpoints which are supposed to be improved. 
