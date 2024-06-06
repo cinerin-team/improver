@@ -115,8 +115,8 @@ def main(original_path_loc, improved_file_loc, repo_file_loc, output_csv_loc):
 if __name__ == '__main__':
     download_the_original_file()
     original_file = "configs/original"
-    improved_file = REPO_FOLDER + FILE_TO_IMPROVE  # This is on repo which should be updated
-    repo_file = TARGET_FOLDER + FILE_TO_IMPROVE  # This is the improved file
+    repo_file = REPO_FOLDER + FILE_TO_IMPROVE  # This is on repo which should be updated
+    improved_file = TARGET_FOLDER + FILE_TO_IMPROVE  # This is the improved file
     output_csv = 'configs/diff.csv'
 
     main(original_file, improved_file, repo_file, output_csv)
