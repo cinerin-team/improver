@@ -90,7 +90,7 @@ def apply_blocks_to_file(original_lines, file2_lines, blocks):
 def download_the_original_file():
     if os.path.exists("configs/original"):
         os.remove("configs/original")
-    shutil.copy("/lab/epg_scm4_builds/program/ci/" + EPGCATS_VERSION + FILE_TO_IMPROVE, "configs/original")
+    shutil.copy("/lab/epg_scm4_builds/program/ci/" + EPGCATS_VERSION + "/" + FILE_TO_IMPROVE, "configs/original")
 
 
 def main(original_path_loc, improved_file_loc, repo_file_loc, output_csv_loc):
