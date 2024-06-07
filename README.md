@@ -21,7 +21,7 @@ Add the file path for the checkpoint file to the `configs/variables.py` starting
 FILE_TO_IMPROVE = "epgcats/tools/verdict/user_checkpoints/stability_checkpoints/tc37540_1_6_16.py"  # starting from epgcats folder 
 TARGET_FOLDER = "/lab/epg_st_sandbox/erkmiap/PCEPGST-2857/"
 
-The first value is the file which contains the checkpoints which are supposed to be improved. 
+The first value is the file which contains the checkpoints that are supposed to be improved. 
 The second value is the destination folder from where the tests can be triggered from the EPG portal.
 
 Attention!! This does only the checkpoint tuning, if other values are needed to be changed then change it manually! Like the subscribers value.
@@ -34,7 +34,7 @@ REPO_FOLDER = '/workspace/git/erkmiap/epg/'
 EPGCATS_VERSION = "EPG_28R252VY1"
 ADDITIONAL_FILES_TO_COPY = ["epgcats/tcdb/TC_TID_general/TC_TID_stability.db"]  # like TC_TID_
 
-The first value is the file which contains the checkpoints which are supposed to be improved. 
+The first value is the file which contains the checkpoints that are supposed to be improved. 
 The second value is the folder where the repo is. WARNING!! the git repo should be clean and updated!!! 
 The third value is for comparison to the downloaded epgcats file.
 The fourth value is for additional files like starting with TC_TID_ or others and give the files in array elements.
