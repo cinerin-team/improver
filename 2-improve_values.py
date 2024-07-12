@@ -25,6 +25,7 @@ if __name__ == '__main__':
     for checkpoint in checkpoints:
         with open(TARGET_FOLDER + FILE_TO_IMPROVE, "r+") as file:
             file_contents = file.read()
+            print(checkpoint['checkpoint'])
             match = re.search("^\s*\(\s*verdict.config.tc.result\(\'" + checkpoint[
                 'checkpoint'] + "\(?\w*\)?\'?\),\s*verdict\.config\.field\.range\((\d+), (\d+)\),?\s*\),",
                               file_contents, re.MULTILINE)
