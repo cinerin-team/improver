@@ -32,7 +32,7 @@ if __name__ == '__main__':
                 [checkpoint['new_value1'], checkpoint['new_value2'], checkpoint['new_value3']], match.group(1),
                 match.group(2))
             old_line = match.group(0)
-            print("for checkpoint: " + checkpoint + " old value: " + old_line)
+            print("for checkpoint: " + checkpoint['checkpoint'] + " old value: " + old_line)
             new_line = re.sub(str("\(" + match.group(1)), "(" + new_values[0], old_line)
             new_line = re.sub(str(match.group(2) + "\)"), new_values[1] + ")", new_line)
             print("new value: " + new_line)
