@@ -8,7 +8,7 @@ if __name__ == '__main__':
 
     f = open("configs/checkpoints.csv", "r+")
     for line in f:
-        new_values[line] = []
+        new_values[line.strip()] = []
     f.close()
 
     for checkpoint in new_values.keys():
