@@ -14,6 +14,7 @@ if __name__ == '__main__':
     for checkpoint in new_values.keys():
         with open(log1 + "/epg_testdata/" + result_value_file, "r+") as file:
             file_contents = file.read()
+            print(file_contents)
             match = re.search(checkpoint + "\:\s(\d+\.?\d*)", file_contents)
             new_values[checkpoint].append(match.group(1))
 
