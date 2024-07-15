@@ -3,3 +3,7 @@ EPGCATS_VERSION = "EPG_28R254DD1"
 FILE_TO_IMPROVE = "epgcats/tools/verdict/user_checkpoints/stability_checkpoints/tc37540_1_6_16.py"  # starting from epgcats folder
 REPO_FOLDER = '/workspace/git/erkmiap/epg/'
 ADDITIONAL_FILES_TO_COPY = ["epgcats/tcdb/TC_TID_general/TC_TID_stability.db"]  # like TC_TID_
+result_value_file = "stability_kpi.yml"
+log1 = "/lab/epg_st_portal_logs/EPG_28R253UZ1_240627_050354_31837171_erkmiap/2024-07-10_21.49_TC37540.1.6.16_Multi_Feature_LOCO_GWC_UPF_2_host_sriov_100mellanox_CX6_stability_ssr-vIP-Pt2"
+log2 = "/lab/epg_st_portal_logs/EPG_28R253UZ1_240627_050354_31837171_erkmiap/2024-07-11_10.51_TC37540.1.6.16_Multi_Feature_LOCO_GWC_UPF_2_host_sriov_100mellanox_CX6_stability_ssr-vIP-Pt2"
+log3 = "/lab/epg_st_portal_logs/EPG_28R253UZ1_240627_050354_31810773_erkmiap/2024-07-07_18.43_TC37540.1.6.16_Multi_Feature_LOCO_GWC_UPF_2_host_sriov_100mellanox_CX6_stability_ssr-vIP-Pt2"
