@@ -29,7 +29,7 @@ if __name__ == '__main__':
             new_values[checkpoint].append(match.group(1))
 
     with open("configs/new_values.csv", "w") as file:
-        file.write("checkpoint,new_value1\n")
+        file.write("checkpoint,new_value1,new_value2,new_value3\n")
         for value in new_values.keys():
             file.write(
                 value + ", " + new_values[value][0] + "," + new_values[value][1] + "," + new_values[value][2] + "\n")
