@@ -1,6 +1,6 @@
 import re
 
-from configs.variables import log1, result_value_file, log3, log2
+from configs.variables import LOG1, RESULT_VALUE_FILE, LOG3, LOG2
 
 if __name__ == '__main__':
     new_values = {}
@@ -11,19 +11,19 @@ if __name__ == '__main__':
     f.close()
 
     for checkpoint in new_values.keys():
-        with open(log1 + "/epg_testdata/" + result_value_file, "r+") as file:
+        with open(LOG1 + "/epg_testdata/" + RESULT_VALUE_FILE, "r+") as file:
             file_contents = file.read()
             match = re.search(checkpoint + "\(?\w*\)?\:\s(\d+\.?\d*)", file_contents, re.MULTILINE)
             new_values[checkpoint].append(match.group(1))
 
     for checkpoint in new_values.keys():
-        with open(log2 + "/epg_testdata/" + result_value_file, "r+") as file:
+        with open(LOG2 + "/epg_testdata/" + RESULT_VALUE_FILE, "r+") as file:
             file_contents = file.read()
             match = re.search(checkpoint + "\(?\w*\)?\:\s(\d+\.?\d*)", file_contents, re.MULTILINE)
             new_values[checkpoint].append(match.group(1))
 
     for checkpoint in new_values.keys():
-        with open(log3 + "/epg_testdata/" + result_value_file, "r+") as file:
+        with open(LOG3 + "/epg_testdata/" + RESULT_VALUE_FILE, "r+") as file:
             file_contents = file.read()
             match = re.search(checkpoint + "\(?\w*\)?\:\s(\d+\.?\d*)", file_contents, re.MULTILINE)
             new_values[checkpoint].append(match.group(1))
