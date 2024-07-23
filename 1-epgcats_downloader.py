@@ -5,9 +5,9 @@ from configs.variables import EPGCATS_VERSION, TARGET_FOLDER
 
 if __name__ == '__main__':
     subprocess.call(
-        ["pv", "/lab/epg_scm4_builds/program/ci/" + EPGCATS_VERSION + "/epgcats", TARGET_FOLDER, "-r"])
+        ["rsync -avzh --progress --stats", "/lab/epg_scm4_builds/program/ci/" + EPGCATS_VERSION + "/epgcats", TARGET_FOLDER, "-r"])
     subprocess.call(
-        ["pv", "/lab/epg_scm4_builds/program/ci/" + EPGCATS_VERSION + "/vipp/test-tools.info", TARGET_FOLDER])
+        ["rsync -avzh --progress --stats", "/lab/epg_scm4_builds/program/ci/" + EPGCATS_VERSION + "/vipp/test-tools.info", TARGET_FOLDER])
     subprocess.call(
         ["mv", TARGET_FOLDER + "test-tools.info", TARGET_FOLDER + "paths"])
 
