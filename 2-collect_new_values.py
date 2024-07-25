@@ -11,19 +11,19 @@ if __name__ == '__main__':
     f.close()
 
     for checkpoint in new_values.keys():
-        with open(LOG1 + "/epg_testdata/" + RESULT_VALUE_FILE, "r+") as file:
+        with open(LOG1 + RESULT_VALUE_FILE, "r+") as file:
             file_contents = file.read()
             match = re.search(checkpoint + "\(?\w*\)?\:\s(\d+\.?\d*)", file_contents, re.MULTILINE)
             new_values[checkpoint].append(match.group(1))
 
     for checkpoint in new_values.keys():
-        with open(LOG2 + "/epg_testdata/" + RESULT_VALUE_FILE, "r+") as file:
+        with open(LOG2 + RESULT_VALUE_FILE, "r+") as file:
             file_contents = file.read()
             match = re.search(checkpoint + "\(?\w*\)?\:\s(\d+\.?\d*)", file_contents, re.MULTILINE)
             new_values[checkpoint].append(match.group(1))
 
     for checkpoint in new_values.keys():
-        with open(LOG3 + "/epg_testdata/" + RESULT_VALUE_FILE, "r+") as file:
+        with open(LOG3 + RESULT_VALUE_FILE, "r+") as file:
             file_contents = file.read()
             match = re.search(checkpoint + "\(?\w*\)?\:\s(\d+\.?\d*)", file_contents, re.MULTILINE)
             new_values[checkpoint].append(match.group(1))
