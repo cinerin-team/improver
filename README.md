@@ -10,7 +10,7 @@ The first value is the destination folder from where the tests can be triggered 
 The second value is the version of the epgcats.
 
 ## Collecting the failed checkpoints' values
-The `2-collect_new_values.py` collects the given checkpoints actual values based on 3 runs.
+The `3-collect_new_values.py` collects the given checkpoints actual values based on 3 runs.
 
 To search for this enter the failing checkpoints' names to the `configs/checkpoints.csv` and the result will be written to `configs/new_values.csv` file.
 And for collect the results you need to add the paths to the `configs/variables.py`:
@@ -20,7 +20,7 @@ LOG3 = "/lab/epg_st_portal_logs/EPG_28R253UZ1_240627_050354_31810773_erkmiap/202
 
 
 ## Improving the values
-The `3-improve_values.py` improves the checkpoints based on 3 runs and modifies the downloaded epgcats.
+The `4-improve_values.py` improves the checkpoints based on 3 runs and modifies the downloaded epgcats.
 
 To have the checkpoints improved based on 3 new runs you must modify the `configs/new_values.csv` with keeping the first line as a header. For example: 
 checkpoint,new_value1,new_value2,new_value3 
@@ -37,7 +37,7 @@ The second value is the destination folder from where the tests can be triggered
 Attention!! This does only the checkpoint tuning, if other values are needed to be changed then change it manually! Like the subscribers value.
  
  ## Uploading to the repo
-The `4-comapre_and_upload_to_repo.py` calculates the changes from the original downloaded epgcats and uploads the changes to the repo.
+The `5-comapre_and_upload_to_repo.py` calculates the changes from the original downloaded epgcats and uploads the changes to the repo.
 To upload the changes to the repo and commit changes of the `configs/variables.py` values. For example: 
 FILE_TO_IMPROVE = "epgcats/tools/verdict/user_checkpoints/stability_checkpoints/tc37540_1_6_16.py" # starting from epgcats folder 
 REPO_FOLDER = '/workspace/git/erkmiap/epg/' 
