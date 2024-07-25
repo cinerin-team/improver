@@ -1,4 +1,4 @@
-TARGET_FOLDER = "/lab/epg_st_sandbox/erkmiap/PCEPGST-2857/"
+TARGET_FOLDER = "/lab/epg_st_sandbox/erkmiap/PCEPGST-2857a/"
 EPGCATS_VERSION = "EPG_28R254JF1"
 FILE_TO_IMPROVE = "epgcats/tools/verdict/user_checkpoints/stability_checkpoints/tc37540_1_6_16.py"  # starting from epgcats folder
 REPO_FOLDER = '/workspace/git/erkmiap/epg/'

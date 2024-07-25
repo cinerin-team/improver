@@ -36,6 +36,7 @@ if __name__ == '__main__':
             new_line = re.sub(str("\(" + match.group(1)), "(" + new_values[0], old_line)
             new_line = re.sub(str(match.group(2) + "\)"), new_values[1] + ")", new_line)
             print("new value: " + new_line)
+            print()
             file_contents = file_contents.replace(old_line, new_line)
             file.seek(0)
             file.truncate()

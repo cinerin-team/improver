@@ -31,5 +31,7 @@ if __name__ == '__main__':
     with open("configs/new_values.csv", "w") as file:
         file.write("checkpoint,new_value1,new_value2,new_value3\n")
         for value in new_values.keys():
+            print("found value: " + value + ", " + new_values[value][0] + "," + new_values[value][1] + "," +
+                  new_values[value][2])
             file.write(
                 value + ", " + new_values[value][0] + "," + new_values[value][1] + "," + new_values[value][2] + "\n")
