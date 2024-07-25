@@ -7,16 +7,19 @@ if __name__ == '__main__':
     with open(LOG1 + "/epg_testdata/verdict.log", "r+") as file:
         file_contents = file.read()
         match = re.search(".*218\s+(PDC.*)\sFailed\!", file_contents, re.MULTILINE)
+        print("found: " + match.group(1))
         new_fails.add(match.group(1))
 
     with open(LOG2 + "/epg_testdata/verdict.log", "r+") as file:
         file_contents = file.read()
         match = re.search(".*218\s+(PDC.*)\sFailed\!", file_contents, re.MULTILINE)
+        print("found: " + match.group(1))
         new_fails.add(match.group(1))
 
     with open(LOG3 + "/epg_testdata/verdict.log", "r+") as file:
         file_contents = file.read()
         match = re.search(".*218\s+(PDC.*)\sFailed\!", file_contents, re.MULTILINE)
+        print("found: " + match.group(1))
         new_fails.add(match.group(1))
 
     with open("configs/checkpoints.csv", "w") as file:
