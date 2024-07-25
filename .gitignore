@@ -163,3 +163,4 @@ cython_debug/
 /configs/diff.csv
 /configs/secret.key
 /configs/original
+/configs/checkpoints.csv
