@@ -25,9 +25,11 @@ if __name__ == '__main__':
     for checkpoint in checkpoints:
         with open(TARGET_FOLDER + FILE_TO_IMPROVE, "r+") as file:
             file_contents = file.read()
-            match = re.search("^\s*\(\s*verdict.config.tc.result\(\'" + checkpoint[
-                'checkpoint'].replace("(", "\(").replace(")", "\)") + "\(?\w*\)?\'?\)?,\s*verdict\.config\.field\.range\((\d+), (\d+)\),?\s*\),",
-                              file_contents, re.MULTILINE)
+            match = re.search(
+                "^\s*\(\s*verdict.config.tc.result\(\'" + checkpoint['checkpoint']
+                .replace("(", "\(").replace(")","\)") +
+                "\(?\w*\)?\'?\)?,\s*verdict\.config\.field\.range\((\d+), (\d+)\),?\s*\),",
+                file_contents, re.MULTILINE)
             new_values = new_value_calc(
                 [checkpoint['new_value1'], checkpoint['new_value2'], checkpoint['new_value3']], match.group(1),
                 match.group(2))
