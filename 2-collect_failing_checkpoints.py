@@ -5,7 +5,6 @@ from configs.variables import LOG1, LOG2, LOG3
 
 
 def find_values(key, json_obj):
-    """Rekurzívan megkeresi a megadott kulcs értékeit a JSON struktúrában"""
     results = []
 
     def _find_values(obj):
