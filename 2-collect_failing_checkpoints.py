@@ -61,3 +61,4 @@ if __name__ == '__main__':
     with open("configs/checkpoints.csv", "w") as file:
         for item in new_fails:
             file.write(item + "\n")
+    print("file created: configs/checkpoints.csv")

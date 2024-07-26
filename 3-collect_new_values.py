@@ -39,3 +39,4 @@ if __name__ == '__main__':
         for value in new_values.keys():
             file.write(
                 value + ", " + new_values[value][0] + "," + new_values[value][1] + "," + new_values[value][2] + "\n")
+    print("file created: configs/new_values.csv")
