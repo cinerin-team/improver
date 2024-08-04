@@ -32,7 +32,7 @@ if __name__ == '__main__':
     values = find_values(key_to_find, json_data)
     for item1 in values:
 
-        match = re.findall(".*31m(.*)\(\d+\.?\d+\) not inbetween.*", item1)
+        match = re.findall(".*31m(.*)\(\[?\d+\.?\d+\]?\) not inbetween.*", item1)
         print("found: " + str(match))
         for item in match:
             new_fails.add(item)
@@ -42,7 +42,7 @@ if __name__ == '__main__':
     values = find_values(key_to_find, json_data)
     for item1 in values:
 
-        match = re.findall(".*31m(.*)\(\d+\.?\d+\) not inbetween.*", item1)
+        match = re.findall(".*31m(.*)\(\[?\d+\.?\d+\]?\) not inbetween.*", item1)
         print("found: " + str(match))
         for item in match:
             new_fails.add(item)
@@ -52,7 +52,7 @@ if __name__ == '__main__':
     values = find_values(key_to_find, json_data)
     for item1 in values:
 
-        match = re.findall(".*31m(.*)\(\d+\.?\d+\) not inbetween.*", item1)
+        match = re.findall(".*31m(.*)\(\[?\d+\.?\d+\]?\) not inbetween.*", item1)
         print("found: " + str(match))
         for item in match:
             new_fails.add(item)
