@@ -1,9 +1,9 @@
-TARGET_FOLDER = "/lab/epg_st_sandbox/erkmiap/PCEPGST-2857/"
-EPGCATS_VERSION = "EPG_28R254MX1"
+TARGET_FOLDER = "/lab/epg_st_sandbox/erkmiap/PCEPGSTT-5389/epgcat/"
+EPGCATS_VERSION = "EPG_28R278TV1"
 FILE_TO_IMPROVE = "epgcats/tools/verdict/user_checkpoints/stability_checkpoints/tc37540_1_6_16.py"  # starting from epgcats folder
 REPO_FOLDER = '/workspace/git/erkmiap/epg/'
 ADDITIONAL_FILES_TO_COPY = ["epgcats/tcdb/TC_TID_general/TC_TID_stability.db"]  # like TC_TID_
 RESULT_VALUE_FILE = "stability_kpi.yml"
-LOG1 = "/lab/epg_st_portal_logs/EPG_28R265H1_240802_090523_32017624_erkmiap/2024-08-02_10.53_TC37540.1.6.16_Multi_Feature_LOCO_GWC_UPF_2_host_sriov_100mellanox_CX6_stability_ssr-vIP-Pt2"
-LOG2 = "/lab/epg_st_portal_logs/EPG_28R265H1_240802_090523_32017624_erkmiap/2024-08-02_23.58_TC37540.1.6.16_Multi_Feature_LOCO_GWC_UPF_2_host_sriov_100mellanox_CX6_stability_ssr-vIP-Pt2"
-LOG3 = "/lab/epg_st_portal_logs/EPG_28R265H1_240802_090523_32017624_erkmiap/2024-08-03_12.52_TC37540.1.6.16_Multi_Feature_LOCO_GWC_UPF_2_host_sriov_100mellanox_CX6_stability_ssr-vIP-Pt2"
+LOG1 = "/lab/epg_st_sandbox/erkmiap/PCEPGSTT-5389/ref1/2024-11-19_10.44_TC37540.1.6.16_Multi_Feature_LOCO_GWC_UPF_2_host_sriov_100mellanox_CX6_stability_ssr-vIP-Pt2"
+LOG2 = "/lab/epg_st_sandbox/erkmiap/PCEPGSTT-5389/ref2/2024-11-21_11.47_TC37540.1.6.16_Multi_Feature_LOCO_GWC_UPF_2_host_sriov_100mellanox_CX6_stability_ssr-vIP-Pt2"
+LOG3 = "/lab/epg_st_sandbox/erkmiap/PCEPGSTT-5389/ref3/2024-11-24_02.20_TC37540.1.6.16_Multi_Feature_LOCO_GWC_UPF_2_host_sriov_100mellanox_CX6_stability_ssr-vIP-Pt2"
